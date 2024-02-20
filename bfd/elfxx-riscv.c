@@ -1180,6 +1180,7 @@ static struct riscv_implicit_subset riscv_implicit_subsets[] =
   {"sscofpmf", "zicsr",		check_implicit_always},
   {"ssstateen", "zicsr",	check_implicit_always},
   {"sstc", "zicsr",		check_implicit_always},
+  {"xo",    "xosec",    check_implicit_always},
   {NULL, NULL, NULL}
 };
 
@@ -1332,6 +1333,8 @@ static struct riscv_supported_ext riscv_supported_std_zxm_ext[] =
 
 static struct riscv_supported_ext riscv_supported_vendor_x_ext[] =
 {
+  {"xo",            ISA_SPEC_CLASS_DRAFT,    1, 0, 0 },
+  {"xosec",         ISA_SPEC_CLASS_DRAFT,    1, 0, 0 },
   {"xtheadba",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
   {"xtheadbb",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
   {"xtheadbs",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
@@ -1656,9 +1659,15 @@ riscv_parse_add_subset (riscv_parse_subset_t *rps,
 	  || minor_version == RISCV_UNKNOWN_VERSION))
     {
       if (subset[0] == 'x')
+        {
+	rps->error_handler
+	  (_("x ISA extension `!!!! %d %d' must be set with the versions"),
+	   major_version, minor_version);
+
 	rps->error_handler
 	  (_("x ISA extension `%s' must be set with the versions"),
 	   subset);
+        }
       /* Allow old ISA spec can recognize zicsr and zifencei.  */
       else if (strcmp (subset, "zicsr") != 0
 	       && strcmp (subset, "zifencei") != 0)
@@ -2358,6 +2367,8 @@ riscv_multi_subset_supports (riscv_parse_subset_t *rps,
     {
     case INSN_CLASS_I:
       return riscv_subset_supports (rps, "i");
+    case INSN_CLASS_XOSEC:
+      return riscv_subset_supports (rps, "xosec");
     case INSN_CLASS_ZICBOM:
       return riscv_subset_supports (rps, "zicbom");
     case INSN_CLASS_ZICBOP:
@@ -2541,6 +2552,8 @@ riscv_multi_subset_supports_ext (riscv_parse_subset_t *rps,
     {
     case INSN_CLASS_I:
       return "i";
+    case INSN_CLASS_XOSEC:
+      return "xosec";
     case INSN_CLASS_ZICBOM:
       return "zicbom";
     case INSN_CLASS_ZICBOP:

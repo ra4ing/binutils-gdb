@@ -334,9 +334,11 @@ const struct riscv_opcode riscv_opcodes[] =
 /* name, xlen, isa, operands, match, mask, match_func, pinfo.  */
 
 /* Security Extension */
-{"sjalr",       0, INSN_CLASS_C, "d,s,t",     MATCH_SJALR, MASK_SJALR, match_opcode, INSN_JSR },
+{"sjalr",       0, INSN_CLASS_XOSEC, "d,s,t",     MATCH_SJALR, MASK_SJALR, match_opcode, INSN_JSR },
 
-{"sjr",         0, INSN_CLASS_I, "s,t",       MATCH_SJALR, MASK_SJALR|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjr",         0, INSN_CLASS_XOSEC, "s,t",       MATCH_SJALR, MASK_SJALR|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
+
+{"sict",         0, INSN_CLASS_XOSEC, "d,s,t",     MATCH_SICT,   MASK_SICT,   match_opcode, 0},
 
 /* Standard hints.  */
 {"prefetch.i",  0, INSN_CLASS_ZICBOP, "Wif(s)", MATCH_PREFETCH_I, MASK_PREFETCH_I, match_opcode, 0 },
