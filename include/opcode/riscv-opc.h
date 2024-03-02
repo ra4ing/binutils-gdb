@@ -23,9 +23,15 @@
 /* Instruction opcode macros.  */
 
 /* Security Extension */
-#define MATCH_SJALR 0x2001067
-#define MASK_SJALR 0xfe00707f
-#define MATCH_SICT 0x2002067
+#define MATCH_SJAL 0x5f
+#define MASK_SJAL 0x7f
+#define MATCH_SJALR 0x106b
+#define MASK_SJALR 0x707f
+#define MATCH_SSRA 0x200206b
+#define MASK_SSRA 0xfe00707f
+#define MATCH_SSJA 0x200306b
+#define MASK_SSJA 0xfe00707f
+#define MATCH_SICT 0x200406b
 #define MASK_SICT 0xfe00707f
 
 #define MATCH_SLLI_RV32 0x1013
@@ -2957,7 +2963,10 @@
 #ifdef DECLARE_INSN
 
 /* Security Extension */
+DECLARE_INSN(sjal, MATCH_SJAL, MASK_SJAL)
 DECLARE_INSN(sjalr, MATCH_SJALR, MASK_SJALR)
+DECLARE_INSN(ssra, MATCH_SSRA, MASK_SSRA)
+DECLARE_INSN(ssja, MATCH_SSJA, MASK_SSJA)
 DECLARE_INSN(sict, MATCH_SICT, MASK_SICT)
 
 DECLARE_INSN(slli_rv32, MATCH_SLLI_RV32, MASK_SLLI_RV32)
