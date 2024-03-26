@@ -1180,7 +1180,7 @@ static struct riscv_implicit_subset riscv_implicit_subsets[] =
   {"sscofpmf", "zicsr",		check_implicit_always},
   {"ssstateen", "zicsr",	check_implicit_always},
   {"sstc", "zicsr",		check_implicit_always},
-  {"xo",    "xosec",    check_implicit_always},
+  {"xs",    "xsec",    check_implicit_always},
   {NULL, NULL, NULL}
 };
 
@@ -1333,8 +1333,8 @@ static struct riscv_supported_ext riscv_supported_std_zxm_ext[] =
 
 static struct riscv_supported_ext riscv_supported_vendor_x_ext[] =
 {
-  {"xo",            ISA_SPEC_CLASS_DRAFT,    1, 0, 0 },
-  {"xosec",         ISA_SPEC_CLASS_DRAFT,    1, 0, 0 },
+  {"xs",           ISA_SPEC_CLASS_DRAFT,    1, 0, 0 },
+  {"xsec",         ISA_SPEC_CLASS_DRAFT,    1, 0, 0 },
   {"xtheadba",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
   {"xtheadbb",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
   {"xtheadbs",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
@@ -2367,8 +2367,8 @@ riscv_multi_subset_supports (riscv_parse_subset_t *rps,
     {
     case INSN_CLASS_I:
       return riscv_subset_supports (rps, "i");
-    case INSN_CLASS_XOSEC:
-      return riscv_subset_supports (rps, "xosec");
+    case INSN_CLASS_XSEC:
+      return riscv_subset_supports (rps, "xsec");
     case INSN_CLASS_ZICBOM:
       return riscv_subset_supports (rps, "zicbom");
     case INSN_CLASS_ZICBOP:
@@ -2552,8 +2552,8 @@ riscv_multi_subset_supports_ext (riscv_parse_subset_t *rps,
     {
     case INSN_CLASS_I:
       return "i";
-    case INSN_CLASS_XOSEC:
-      return "xosec";
+    case INSN_CLASS_XSEC:
+      return "xsec";
     case INSN_CLASS_ZICBOM:
       return "zicbom";
     case INSN_CLASS_ZICBOP:

@@ -334,28 +334,34 @@ const struct riscv_opcode riscv_opcodes[] =
 /* name, xlen, isa, operands, match, mask, match_func, pinfo.  */
 
 /* Security Extension */
-{"ssra",         0, INSN_CLASS_XOSEC, "d,s,t",     MATCH_SSRA, MASK_SSRA, match_opcode, 0},
-{"ssja",         0, INSN_CLASS_XOSEC, "d,s,t",     MATCH_SSJA, MASK_SSJA, match_opcode, 0},
-{"sict",         0, INSN_CLASS_XOSEC, "d,s,t",     MATCH_SICT,   MASK_SICT,   match_opcode, 0},
+{"ssra",         0, INSN_CLASS_XSEC, "d,s,t",     MATCH_SSRA, MASK_SSRA, match_opcode, 0},
+{"ssja",         0, INSN_CLASS_XSEC, "d,s,t",     MATCH_SSJA, MASK_SSJA, match_opcode, 0},
+{"sict",         0, INSN_CLASS_XSEC, "d,s,t",     MATCH_SICT,   MASK_SICT,   match_opcode, 0},
 
-{"seret",        0, INSN_CLASS_XOSEC, "",          MATCH_SJALR|(X_RA << OP_SH_RS1), MASK_SJALR|MASK_RD|MASK_RS1|MASK_IMM, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"seret",        0, INSN_CLASS_XSEC, "",          MATCH_SJALRR|(X_RA << OP_SH_RS1), MASK_SJALRR|MASK_RD|MASK_RS1|MASK_IMM, match_opcode, INSN_ALIAS|INSN_BRANCH },
 
-{"sjr",          0, INSN_CLASS_XOSEC, "s",         MATCH_SJALR, MASK_SJALR|MASK_RD|MASK_IMM, match_opcode, INSN_ALIAS|INSN_BRANCH },
-{"sjr",          0, INSN_CLASS_XOSEC, "o(s)",      MATCH_SJALR, MASK_SJALR|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
-{"sjr",          0, INSN_CLASS_XOSEC, "s,j",       MATCH_SJALR, MASK_SJALR|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
-{"sjalr",        0, INSN_CLASS_XOSEC, "s",         MATCH_SJALR|(X_RA << OP_SH_RD), MASK_SJALR|MASK_RD|MASK_IMM, match_opcode, INSN_ALIAS|INSN_JSR },
-{"sjalr",        0, INSN_CLASS_XOSEC, "o(s)",      MATCH_SJALR|(X_RA << OP_SH_RD), MASK_SJALR|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
-{"sjalr",        0, INSN_CLASS_XOSEC, "s,j",       MATCH_SJALR|(X_RA << OP_SH_RD), MASK_SJALR|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
-{"sjalr",        0, INSN_CLASS_XOSEC, "d,s",       MATCH_SJALR, MASK_SJALR|MASK_IMM, match_opcode, INSN_ALIAS|INSN_JSR },
-{"sjalr",        0, INSN_CLASS_XOSEC, "d,o(s)",    MATCH_SJALR, MASK_SJALR, match_opcode, INSN_JSR },
-{"sjalr",        0, INSN_CLASS_XOSEC, "d,s,j",     MATCH_SJALR, MASK_SJALR, match_opcode, INSN_JSR },
+{"sjrr",          0, INSN_CLASS_XSEC, "s",         MATCH_SJALRR, MASK_SJALRR|MASK_RD|MASK_IMM, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjrr",          0, INSN_CLASS_XSEC, "o(s)",      MATCH_SJALRR, MASK_SJALRR|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjrr",          0, INSN_CLASS_XSEC, "s,j",       MATCH_SJALRR, MASK_SJALRR|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjalrr",        0, INSN_CLASS_XSEC, "s",         MATCH_SJALRR|(X_RA << OP_SH_RD), MASK_SJALRR|MASK_RD|MASK_IMM, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrr",        0, INSN_CLASS_XSEC, "o(s)",      MATCH_SJALRR|(X_RA << OP_SH_RD), MASK_SJALRR|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrr",        0, INSN_CLASS_XSEC, "s,j",       MATCH_SJALRR|(X_RA << OP_SH_RD), MASK_SJALRR|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrr",        0, INSN_CLASS_XSEC, "d,s",       MATCH_SJALRR, MASK_SJALRR|MASK_IMM, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrr",        0, INSN_CLASS_XSEC, "d,o(s)",    MATCH_SJALRR, MASK_SJALRR, match_opcode, INSN_JSR },
+{"sjalrr",        0, INSN_CLASS_XSEC, "d,s,j",     MATCH_SJALRR, MASK_SJALRR, match_opcode, INSN_JSR },
 
-// {"sj",           0, INSN_CLASS_XOSEC, "a",         MATCH_SJAL, MASK_SJAL|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
-// {"sjal",         0, INSN_CLASS_XOSEC, "a",         MATCH_SJAL|(X_RA << OP_SH_RD), MASK_SJAL|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
-// {"sjal",         0, INSN_CLASS_XOSEC, "d,a",       MATCH_SJAL, MASK_SJAL, match_opcode, INSN_JSR },
+{"sjrj",          0, INSN_CLASS_XSEC, "s",         MATCH_SJALRJ, MASK_SJALRJ|MASK_RD|MASK_IMM, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjrj",          0, INSN_CLASS_XSEC, "o(s)",      MATCH_SJALRJ, MASK_SJALRJ|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjrj",          0, INSN_CLASS_XSEC, "s,j",       MATCH_SJALRJ, MASK_SJALRJ|MASK_RD, match_opcode, INSN_ALIAS|INSN_BRANCH },
+{"sjalrj",        0, INSN_CLASS_XSEC, "s",         MATCH_SJALRJ|(X_RA << OP_SH_RD), MASK_SJALRJ|MASK_RD|MASK_IMM, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrj",        0, INSN_CLASS_XSEC, "o(s)",      MATCH_SJALRJ|(X_RA << OP_SH_RD), MASK_SJALRJ|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrj",        0, INSN_CLASS_XSEC, "s,j",       MATCH_SJALRJ|(X_RA << OP_SH_RD), MASK_SJALRJ|MASK_RD, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrj",        0, INSN_CLASS_XSEC, "d,s",       MATCH_SJALRJ, MASK_SJALRJ|MASK_IMM, match_opcode, INSN_ALIAS|INSN_JSR },
+{"sjalrj",        0, INSN_CLASS_XSEC, "d,o(s)",    MATCH_SJALRJ, MASK_SJALRJ, match_opcode, INSN_JSR },
+{"sjalrj",        0, INSN_CLASS_XSEC, "d,s,j",     MATCH_SJALRJ, MASK_SJALRJ, match_opcode, INSN_JSR },
 
-{"secall",        0, INSN_CLASS_XOSEC, "d,c",       (X_T1 << OP_SH_RS1), (int) M_SECALL, match_never, INSN_MACRO },
-{"secall",        0, INSN_CLASS_XOSEC, "c",         (X_RA << OP_SH_RS1)|(X_RA << OP_SH_RD), (int) M_SECALL, match_never, INSN_MACRO },
+{"secall",        0, INSN_CLASS_XSEC, "d,c",       (X_T1 << OP_SH_RS1), (int) M_SECALL, match_never, INSN_MACRO },
+{"secall",        0, INSN_CLASS_XSEC, "c",         (X_RA << OP_SH_RS1)|(X_RA << OP_SH_RD), (int) M_SECALL, match_never, INSN_MACRO },
 
 /* Standard hints.  */
 {"prefetch.i",  0, INSN_CLASS_ZICBOP, "Wif(s)", MATCH_PREFETCH_I, MASK_PREFETCH_I, match_opcode, 0 },

@@ -370,7 +370,7 @@ enum riscv_insn_class
 {
   INSN_CLASS_NONE,
 
-  INSN_CLASS_XOSEC,
+  INSN_CLASS_XSEC,
   INSN_CLASS_I,
   INSN_CLASS_C,
   INSN_CLASS_A,

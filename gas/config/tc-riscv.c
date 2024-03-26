@@ -860,7 +860,6 @@ static const struct opcode_name_t opcode_name_list[] =
   {"OP_V",      0x57},
   {"CUSTOM_2",  0x5b},
   /* 48b        0x5f.  */
-  {"SJAL",      0x5f},
   {"BRANCH",    0x63},
   {"JALR",      0x67},
   /*reserved    0x5b.  */
@@ -1865,7 +1864,7 @@ riscv_secall (int destreg, int tempreg, expressionS *ep,
   /* Ensure the jalr is emitted to the same frag as the auipc.  */
   frag_grow (8);
   macro_build (ep, "auipc", "d,u", tempreg, reloc);
-  macro_build (NULL, "sjalr", "d,s", destreg, tempreg);
+  macro_build (NULL, "sjalrj", "d,s", destreg, tempreg);
   /* See comment at end of append_insn.  */
   frag_wane (frag_now);
   frag_new (0);
@@ -4696,7 +4695,6 @@ md_convert_frag_branch (fragS *fragp)
       fixp = fix_new_exp (fragp, buf - (bfd_byte *)fragp->fr_literal,
 			  4, &exp, false, BFD_RELOC_RISCV_JMP);
       bfd_putl32 (MATCH_JAL, buf);
-      bfd_putl32 (MATCH_SJAL, buf);
       buf += 4;
       break;
 
