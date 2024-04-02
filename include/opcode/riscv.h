@@ -542,7 +542,6 @@ enum
   M_FSD,
   M_FSQ,
   M_CALL,
-  M_SECALL,
   M_J,
   M_LI,
   M_ZEXTH,
