@@ -360,9 +360,6 @@ const struct riscv_opcode riscv_opcodes[] =
 {"sjalrj",        0, INSN_CLASS_XSEC, "d,o(s)",    MATCH_SJALRJ, MASK_SJALRJ, match_opcode, INSN_JSR },
 {"sjalrj",        0, INSN_CLASS_XSEC, "d,s,j",     MATCH_SJALRJ, MASK_SJALRJ, match_opcode, INSN_JSR },
 
-{"secall",        0, INSN_CLASS_XSEC, "d,c",       (X_T1 << OP_SH_RS1), (int) M_SECALL, match_never, INSN_MACRO },
-{"secall",        0, INSN_CLASS_XSEC, "c",         (X_RA << OP_SH_RS1)|(X_RA << OP_SH_RD), (int) M_SECALL, match_never, INSN_MACRO },
-
 /* Standard hints.  */
 {"prefetch.i",  0, INSN_CLASS_ZICBOP, "Wif(s)", MATCH_PREFETCH_I, MASK_PREFETCH_I, match_opcode, 0 },
 {"prefetch.r",  0, INSN_CLASS_ZICBOP, "Wif(s)", MATCH_PREFETCH_R, MASK_PREFETCH_R, match_opcode, 0 },

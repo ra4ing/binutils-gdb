@@ -860,6 +860,7 @@ static const struct opcode_name_t opcode_name_list[] =
   {"OP_V",      0x57},
   {"CUSTOM_2",  0x5b},
   /* 48b        0x5f.  */
+
   {"BRANCH",    0x63},
   {"JALR",      0x67},
   /*reserved    0x5b.  */
@@ -2139,7 +2140,8 @@ macro (struct riscv_cl_insn *ip, expressionS *imm_expr,
     case M_CALL:
       riscv_call (rd, rs1, imm_expr, *imm_reloc);
       break;
-    case M_    case M_ZEXTH:
+
+    case M_ZEXTH:
       riscv_ext (rd, rs1, xlen - 16, false);
       break;
 
