@@ -1857,19 +1857,6 @@ riscv_call (int destreg, int tempreg, expressionS *ep,
   frag_new (0);
 }
 
-static void
-riscv_secall (int destreg, int tempreg, expressionS *ep,
-	    bfd_reloc_code_real_type reloc)
-{
-  /* Ensure the jalr is emitted to the same frag as the auipc.  */
-  frag_grow (8);
-  macro_build (ep, "auipc", "d,u", tempreg, reloc);
-  macro_build (NULL, "sjalrj", "d,s", destreg, tempreg);
-  /* See comment at end of append_insn.  */
-  frag_wane (frag_now);
-  frag_new (0);
-}
-
 /* Load an integer constant into a register.  */
 
 static void
@@ -2152,11 +2139,7 @@ macro (struct riscv_cl_insn *ip, expressionS *imm_expr,
     case M_CALL:
       riscv_call (rd, rs1, imm_expr, *imm_reloc);
       break;
-    case M_SECALL:
-      riscv_secall (rd, rs1, imm_expr, *imm_reloc);
-      break;
-
-    case M_ZEXTH:
+    case M_    case M_ZEXTH:
       riscv_ext (rd, rs1, xlen - 16, false);
       break;
 
